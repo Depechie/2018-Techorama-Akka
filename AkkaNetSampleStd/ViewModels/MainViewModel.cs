@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using AkkaNetSampleStd.AkkaSystem;
 using AkkaNetSampleStd.Messages;
 using Xamarin.Forms;
 
@@ -22,10 +23,6 @@ namespace AkkaNetSampleStd.ViewModels
         }
 
         private ICommand _startCrawlingCommand;
-        public ICommand StartCrawlingCommand => _startCrawlingCommand ?? (_startCrawlingCommand = new Command(HandleAction));
-
-        private void HandleAction()
-        {
-        }
+        public ICommand StartCrawlingCommand => _startCrawlingCommand ?? (_startCrawlingCommand = new Command(() => CrawlingSystem.StartCrawling(_url, this)));
     }
 }
