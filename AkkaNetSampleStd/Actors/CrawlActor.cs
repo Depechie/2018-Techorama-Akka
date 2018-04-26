@@ -16,7 +16,7 @@ namespace AkkaNetSampleStd.Actors
         }
 
         private void OnReveiveTarget(Target msg)
-        {
+        {            
             System.Diagnostics.Debug.WriteLine($"*** CRAWLING - {Self.Path} - {msg.Url}");
 
             var config = Configuration.Default.WithDefaultLoader();
