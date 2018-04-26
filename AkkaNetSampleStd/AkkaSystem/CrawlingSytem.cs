@@ -29,5 +29,13 @@ namespace AkkaNetSampleStd.AkkaSystem
             //Kick off the first crawl through use of Akka.Net
             _coordinator.Tell(new Target() { Url = url });
         }
+
+        public static void Stop()
+        {
+            //Let the actor execute the message currently being executed before shutting down the whole actor instance
+            //This means that no other messages will be executed, including those that are enqueued before the actual Stop() method is invoked! ( We should see dead letters in the log )
+            _system.Stop(_coordinator);
+            _system.Terminate();
+        }
     }
 }
