@@ -24,5 +24,8 @@ namespace AkkaNetSampleStd.ViewModels
 
         private ICommand _startCrawlingCommand;
         public ICommand StartCrawlingCommand => _startCrawlingCommand ?? (_startCrawlingCommand = new Command(() => CrawlingSystem.StartCrawling(_url, this)));
+
+        private ICommand _stopCrawlingCommand;
+        public ICommand StopCrawlingCommand => _stopCrawlingCommand ?? (_stopCrawlingCommand = new Command(() => CrawlingSystem.Stop()));
     }
 }

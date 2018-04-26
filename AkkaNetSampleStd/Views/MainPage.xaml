@@ -9,6 +9,7 @@
                        HorizontalOptions="FillAndExpand" Keyboard="Url"
                        Placeholder="Enter a URL" HeightRequest="40" FontSize="20" />
                 <Button Text="Crawl" Command="{Binding StartCrawlingCommand}" />
+                <Button Text="Stop crawling" Command="{Binding StopCrawlingCommand}" />
             </StackLayout>
 
             <ListView ItemsSource="{Binding Results}">
