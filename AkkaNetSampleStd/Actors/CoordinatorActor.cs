@@ -11,7 +11,9 @@ namespace AkkaNetSampleStd.Actors
 
         public CoordinatorActor()
         {
-            _crawlers = Context.ActorOf(Props.Create(() => new CrawlActor(Self)));
+            //Enable auto spawning of 5 Crawling actors
+            //New messages are routed to the actor with the current smallest mailbox ( amount of queued messages in it's mailbox )
+            _crawlers = Context.ActorOf(Props.Create(() => new CrawlActor(Self)).WithRouter(new SmallestMailboxPool(5)));
 
             Receive<Target>(msg => _crawlers.Tell(msg));
             Receive<TargetLinks>(msg => OnReceiveTargetLinks(msg));
