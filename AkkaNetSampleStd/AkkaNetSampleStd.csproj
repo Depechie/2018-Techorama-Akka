@@ -11,14 +11,11 @@
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Messages\" />
+    <Folder Include="Actors\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
     <PackageReference Include="Akka" Version="1.3.6" />
     <PackageReference Include="AngleSharp" Version="0.9.9.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Actors\CoordinatorActor.cs" />
-    <Compile Remove="Actors\CrawlActor.cs" />
   </ItemGroup>
 </Project>
