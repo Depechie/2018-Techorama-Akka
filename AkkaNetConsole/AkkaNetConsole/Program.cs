@@ -15,8 +15,8 @@ namespace AkkaNetConsole
 
             musicPlayer.Tell(new PlaySongMessage("Never let me down again"));
             musicPlayer.Tell(new PlaySongMessage("Enjoy the silence"));
-            //musicPlayer.Tell(new StopPlayingMessage());
-            //musicPlayer.Tell(new StopPlayingMessage());
+            musicPlayer.Tell(new StopPlayingMessage());
+            musicPlayer.Tell(new StopPlayingMessage());
             musicPlayer.Tell(new PlaySongMessage("Enjoy the silence"));
 
             Console.Read();
