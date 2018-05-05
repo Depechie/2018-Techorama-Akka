@@ -6,7 +6,7 @@ namespace AkkaNetConsole.Actors
 {
     public class MusicPlayerActor : ReceiveActor
     {
-        protected string CurrentSong;
+        protected PlaySongMessage CurrentSong;
 
         public MusicPlayerActor()
         {
@@ -15,30 +15,40 @@ namespace AkkaNetConsole.Actors
 
         private void StoppedBehavior()
         {
-            Receive<PlaySongMessage>(m => PlaySong(m.Song));
-            Receive<StopPlayingMessage>(m => Console.WriteLine("Cannot stop, the actor is already stopped"));
+            Receive<PlaySongMessage>(m => PlaySong(m));
+            Receive<StopPlayingMessage>(m => Console.WriteLine($"{m.User}'s player: Cannot stop, the actor is already stopped"));
         }
 
         private void PlayingBehavior()
         {
-            Receive<PlaySongMessage>(m => Console.WriteLine($"Cannot play. Currently playing '{CurrentSong}'"));
+            Receive<PlaySongMessage>(m => Console.WriteLine($"{CurrentSong.User}'s player: Cannot play. Currently playing '{CurrentSong.Song}'"));
             Receive<StopPlayingMessage>(m => StopPlaying());
         }
 
-        private void PlaySong(string song)
+        private void PlaySong(PlaySongMessage song)
         {
             CurrentSong = song;
-            Console.WriteLine($"Currently playing '{CurrentSong}'");
+            Console.WriteLine($"{CurrentSong.User} is currently listening to '{CurrentSong.Song}'");
+            DisplayInformation();
 
             Become(PlayingBehavior);
         }
 
         private void StopPlaying()
         {
+            Console.WriteLine($"{CurrentSong.User}'s player is currently stopped.");
             CurrentSong = null;
-            Console.WriteLine($"Player is currently stopped.");
 
             Become(StoppedBehavior);
+        }
+
+        private void DisplayInformation()
+        {
+            Console.WriteLine("Actor's information:");
+            Console.WriteLine($"Typed Actor named: {Self.Path.Name}");
+            Console.WriteLine($"Actor's path: {Self.Path}");
+            Console.WriteLine($"Actor is part of the ActorSystem: {Context.System.Name}");
+            Console.WriteLine($"Actor's parent: {Context.Self.Path.Parent.Name}");
         }
     }
 }
