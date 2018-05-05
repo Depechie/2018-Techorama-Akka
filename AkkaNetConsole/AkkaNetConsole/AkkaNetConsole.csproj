@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\MusicPlayerActor.cs" />
+    <Compile Include="Messages\PlaySongMessage.cs" />
+    <Compile Include="Messages\StopPlayingMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
